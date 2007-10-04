@@ -1,0 +1,6 @@
+Revision history for Perl extension Catalyst::Plugin::CommandLine.
+
+0.01  Thu Oct  4 17:53:18 2007
+	- original version; created by h2xs 1.23 with options
+		--omit-autoload --omit-XS --use-new-tests --skip-exporter --compat-version 5.6.0 --name Catalyst::Plugin::CommandLine
+
