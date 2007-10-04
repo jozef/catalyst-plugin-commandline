@@ -2,5 +2,7 @@ Changes
 Makefile.PL
 MANIFEST
 README
-t/Catalyst-Plugin-CommandLine.t
+t/00-distribution.t
+t/00-signature.t
+t/01-Catalyst-Plugin-CommandLine.t
 lib/Catalyst/Plugin/CommandLine.pm
