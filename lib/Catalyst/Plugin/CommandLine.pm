@@ -6,10 +6,13 @@ Catalyst::Plugin::CommandLine - Catalyst plugin to make $c available also for sc
 
 =head1 SYNOPSIS
 
+	# in MyCatalystApp.pm
+	use Catalyst qw( CommandLine );
+
+	# in a script
 	use MyCatalystApp;
 
-	my $c = MyCatalystApp->new('MyCatalystApp');
-	$c->commandline;
+	my $c = MyCatalystApp->commandline;
 	
 	$c->stash->{ ...
 	$c->model( ...
@@ -30,6 +33,11 @@ use warnings;
 
 use NEXT;
 use UNIVERSAL qw{ can };
+use HTTP::Headers;
+use Catalyst::Request;
+use Catalyst::Response;
+use URI::http;
+use English '-no_match_vars';
 
 our $VERSION = "0.03";
 
@@ -44,16 +52,59 @@ Setups stash, request, response, sessionid.
 =cut
 
 sub commandline {
-    my ( $c, $class, $action ) = @_;
+    my $class;
+    my $c;
+
+	# if called as constructor then contruct the object
+    if (ref $_[0] eq '') {
+    	$class = shift;
+    	$c = $class->new();
+    }
+    # otherwise get "$self"
+    else {
+	    $c = shift;
+	    
+	    # prevent reinitializing
+	    return $c if $c->commandline_mode;
+    }
+    
+	my $uri_path = '/';
+	my $uri = \$uri_path;
+	bless $uri, 'URI::http';
+
+	my $base = \$c->config->{'base'};
+	bless $base, 'URI::http';
 
 	$c->stash({ CommandLine => 1 });
-	$c->request(Catalyst::Request->new({ cookies => {}, base => $c->config->{'base'} }));
-	$c->response(Catalyst::Response->new({ cookies => {} }));
+	$c->request(Catalyst::Request->new({
+		'cookies' => {},
+		'base'    => $base,
+		'uri'     => $uri,
+		'secure'  => 1,
+	}));
+	$c->response(Catalyst::Response->new({
+		'cookies' => {},
+		'headers' => HTTP::Headers->new,
+	}));
+
+	# execute the root auto method
+	$c->controller('Root')->auto($c);
 	
-	#if we have session setup sessionid
-	if (can($c, 'sessionid')) {
-		$c->sessionid('".$0." ".$PID."');
-	}
+	return $c;
+}
+
+
+=head2 commandline_mode
+
+Returns true/false if catalyst is running in commandline mode.
+
+=cut
+
+sub commandline_mode {
+	my $c = shift;
+	
+	return 1 if $c->stash->{'CommandLine'};
+	return 0;
 }
 
 1;
