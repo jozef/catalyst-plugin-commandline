@@ -37,7 +37,6 @@ use HTTP::Headers;
 use Catalyst::Request;
 use Catalyst::Response;
 use URI::http;
-use English '-no_match_vars';
 
 our $VERSION = "0.03";
 
