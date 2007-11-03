@@ -5,4 +5,6 @@ README
 t/00-distribution.t
 t/00-signature.t
 t/01-Catalyst-Plugin-CommandLine.t
+t/pod-coverage.t
+t/pod.t
 lib/Catalyst/Plugin/CommandLine.pm

@@ -1,4 +1,11 @@
 Revision history for Perl extension Catalyst::Plugin::CommandLine.
 
-0.01  Thu Oct  4 17:53:18 2007
-	- intial version
+0.03  Sat Nov  3 17:18:22 2007
+    - more modules dependencies
+    - commandline_mode true/false method
+    - calling $c->controller(Root)->auto during initialization
+    - ->commandline as constructor
+    - pod.t, pod-coverage.t
+
+0.02  Thu Oct  4 17:53:18 2007
+	- initial version
