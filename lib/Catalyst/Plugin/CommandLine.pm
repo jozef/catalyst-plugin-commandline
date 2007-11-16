@@ -102,7 +102,7 @@ Returns true/false if catalyst is running in commandline mode.
 sub commandline_mode {
 	my $c = shift;
 	
-	return 1 if $c->stash->{'CommandLine'};
+	return 1 if ($c->stash and $c->stash->{'CommandLine'});
 	return 0;
 }
 
