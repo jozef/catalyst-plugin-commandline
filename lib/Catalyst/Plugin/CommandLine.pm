@@ -87,7 +87,8 @@ sub commandline {
 	}));
 
 	# execute the root auto method
-	$c->controller('Root')->auto($c);
+	$c->controller('Root')->auto($c)
+	    if $c->controller('Root')->can('auto');
 	
 	return $c;
 }

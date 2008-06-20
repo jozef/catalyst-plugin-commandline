@@ -1,5 +1,8 @@
 Revision history for Perl extension Catalyst::Plugin::CommandLine.
 
+0.04  Fri Jun 20 11:43:23 2007
+    - call auto() only if root can
+
 0.03  Sat Nov  3 17:18:22 2007
     - more modules dependencies
     - commandline_mode true/false method
