@@ -38,7 +38,7 @@ use Catalyst::Request;
 use Catalyst::Response;
 use URI::http;
 
-our $VERSION = "0.04";
+our $VERSION = "0.05";
 
 =head1 FUNCTIONS
 
@@ -80,6 +80,7 @@ sub commandline {
 		'base'    => $base,
 		'uri'     => $uri,
 		'secure'  => 1,
+		'headers' => HTTP::Headers->new,
 	}));
 	$c->response(Catalyst::Response->new({
 		'cookies' => {},
@@ -111,7 +112,7 @@ sub commandline_mode {
 
 =head1 AUTHOR
 
-Jozef Kutej - E<lt>jozef@kutej.netE<gt>
+Jozef Kutej - E<lt>jkutej@cpan.orgE<gt>
 
 =head1 COPYRIGHT AND LICENSE
 

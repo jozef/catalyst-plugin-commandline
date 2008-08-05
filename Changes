@@ -1,5 +1,8 @@
 Revision history for Perl extension Catalyst::Plugin::CommandLine.
 
+0.05  Tue Aug 05 14:50:00 2008
+    - added headers to request (thanks to Yung-chung Lin)
+
 0.04  Fri Jun 20 11:43:23 2007
     - call auto() only if root can
 
